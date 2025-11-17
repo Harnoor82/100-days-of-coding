@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    char date[20];
+    printf("Enter date (dd/mm/yyyy): ");
+    scanf("%19s", date);  
+
+    char day[3] = {0}, month[3] = {0}, year[5] = {0};
+    sscanf(date, "%2[^/]/%2[^/]/%4s", day, month, year);
+
+    char *months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+    int month_num = 0;
+    if (month[0] != '\0') {
+        month_num = (month[0]-'0')*10 + (month[1]-'0');
+    }
+
+    if(month_num < 1 || month_num > 12) {
+        printf("Invalid month\n");
+        return 1;
+    }
+
+    printf("Formatted date: %s-%s-%s\n", day, months[month_num - 1], year);
+    return 0;
+}
